@@ -1,0 +1,29 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "Node.js boilerplate package",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "gendiff": "bin/gendiff.js"
+  },
+  "scripts": {
+    "test": "gendiff -h"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Anitnelav01/frontend-project-46.git"
+  },
+  "keywords": [
+    "project"
+  ],
+  "author": "Valentine Gorshkova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Anitnelav01/frontend-project-46/issues"
+  },
+  "homepage": "https://github.com/Anitnelav01/frontend-project-46#readme",
+  "dependencies": {
+    "commander": "^9.4.1"
+  }
+}
