@@ -4,7 +4,6 @@
 [![Actions Status](https://github.com/Anitnelav01/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/Anitnelav01/frontend-project-46/actions)
 
 
+### JSON
 
-JSON
-
-https://asciinema.org/a/KyHXLWtNnQRvi0mM5rAwj6Xks
+[![asciicast](https://asciinema.org/a/KyHXLWtNnQRvi0mM5rAwj6Xks.svg)](https://asciinema.org/a/KyHXLWtNnQRvi0mM5rAwj6Xks)
