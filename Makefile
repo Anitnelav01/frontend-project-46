@@ -1,11 +1,16 @@
+install:
+	npm ci
+
+gendiff:
+	node/gendiff.js
+
+publish:
+	npm publish --dry-run
+
 lint:
 	npx eslint .
 
-say-hello:
-	[bash]
-----
-make say-hello
-Hello, World!
-----
-
+test-coverage:
+	npm test -- --coverage
+	
 .PHONY: test
