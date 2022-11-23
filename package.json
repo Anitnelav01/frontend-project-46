@@ -1,14 +1,14 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "Node.js boilerplate package",
-  "main": "./src/index.js",
+  "description": "Difference Calculator",
+  "main": "src/index.js",
   "type": "module",
   "bin": {
     "gendiff": "bin/gendiff.js"
   },
   "scripts": {
-    "test": "gendiff -h"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -28,7 +28,10 @@
     "lodash": "^4.17.21"
   },
   "devDependencies": {
-    "jest": "^29.3.1",
-    "make-lint": "^1.0.1"
+    "eslint": "^8.28.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-react": "^7.31.11",
+    "jest": "^29.3.1"
   }
 }

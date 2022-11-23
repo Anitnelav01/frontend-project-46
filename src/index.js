@@ -23,16 +23,16 @@ const parser = (filepath1, filepath2) => {
 const parseDiff = (diff) => {
   const items = diff.flatMap(({ state, key, value }) => {
     if (state === 'removed') {
-      return [` - ${key}: ${value}`];
+      return ` - ${key}: ${value}`;
     }
     if (state === 'unchanged') {
-      return [`   ${key}: ${value}`];
+      return `   ${key}: ${value}`;
     }
     if (state === 'complex') {
       formatStylish(diff);
     }
     if (state === 'added') {
-      return [` + ${key}: ${value}`];
+      return ` + ${key}: ${value}`;
     }
     if (state === 'updated') {
       return [` - ${key}: ${value.oldValue}`, ` + ${key}: ${value.newValue}`];
