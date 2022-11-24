@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1669271880844" clover="3.2.0">
-  <project timestamp="1669271880844" name="All files">
+<coverage generated="1669286074131" clover="3.2.0">
+  <project timestamp="1669286074131" name="All files">
     <metrics statements="43" coveredstatements="41" conditionals="20" coveredconditionals="16" methods="11" coveredmethods="11" elements="74" coveredelements="68" complexity="0" loc="43" ncloc="43" packages="1" files="3" classes="3"/>
     <file name="buildDiff.js" path="/home/valentina/frontend-project-46/src/buildDiff.js">
       <metrics statements="13" coveredstatements="12" conditionals="10" coveredconditionals="8" methods="2" coveredmethods="2"/>
