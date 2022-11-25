@@ -2,11 +2,10 @@ import path from 'path';
 import { readFileSync } from 'fs';
 import buildDiff from './buildDiff.js';
 import parse from './parse.js';
+import formatStylish from './formatters/formatStylish.js';
 
 const getPath = (filename) => path.resolve(process.cwd(), filename);
-
 const getFileFormat = (filename) => path.extname(filename).slice(1);
-
 const readFile = (filepath) => readFileSync(filepath, 'utf8');
 
 const parser = (filepath1, filepath2) => {
@@ -19,31 +18,5 @@ const parser = (filepath1, filepath2) => {
   const formattedDiff = formatStylish(diff);
   return formattedDiff;
 };
-
-const parseDiff = (diff) => {
-  const items = diff.flatMap(({ state, key, value }) => {
-    if (state === 'removed') {
-      return ` - ${key}: ${value}`;
-    }
-    if (state === 'unchanged') {
-      return `   ${key}: ${value}`;
-    }
-    if (state === 'complex') {
-      formatStylish(diff);
-    }
-    if (state === 'added') {
-      return ` + ${key}: ${value}`;
-    }
-    if (state === 'updated') {
-      return [` - ${key}: ${value.oldValue}`, ` + ${key}: ${value.newValue}`];
-    }
-  });
-
-  const body = items.join('\n');
-  return wrapBrackets(body);
-};
-
-const wrapBrackets = (body) => `{\n${body}\n}`;
-const formatStylish = (diff) => parseDiff(diff);
 
 export default parser;
