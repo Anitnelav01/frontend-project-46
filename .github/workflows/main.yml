@@ -1,4 +1,4 @@
-name: Tests   
+name: Linter   
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v3.0.0
         env:
-          CC_TEST_REPORTER_ID: 437e5e9c797a4ba7390b070d2f23feefe09797cfb9688268c60d4c5bda38fddf
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
           coverageCommand: make test-coverage
           debug: true
