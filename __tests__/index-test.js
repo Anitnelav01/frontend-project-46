@@ -16,3 +16,11 @@ test('file json', () => {
   const result = readFileSync(resultname, 'utf8');
   expect(parser(filename1, filename2)).toBe(result);
 });
+
+test('file yml', () => {
+  const filename1 = getFixturePath('file1.yml');
+  const filename2 = getFixturePath('file2.yml');
+  const resultname = getFixturePath('file_result.txt');
+  const result = readFileSync(resultname, 'utf8');
+  expect(parser(filename1, filename2)).toBe(result);
+});
