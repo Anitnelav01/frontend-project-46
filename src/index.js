@@ -2,7 +2,7 @@ import path from 'path';
 import { readFileSync } from 'fs';
 import buildDiff from './buildDiff.js';
 import parse from './parse.js';
-import formatStylish from './formatters/formatStylish.js';
+import formatStylish from './formatters/stylish.js';
 
 const getPath = (filename) => path.resolve(process.cwd(), filename);
 const getFileFormat = (filename) => path.extname(filename).slice(1);
