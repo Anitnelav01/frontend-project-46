@@ -10,43 +10,43 @@ const __dirname = path.dirname(__filename);
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
 const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
 
-test('test filepath.json', () => {
+test('testing filepath.json', () => {
   const expected = readFile('resultFilepath.txt');
   const actual = parser(getFixturePath('filepath1.json'), getFixturePath('filepath2.json'), 'stylish');
   expect(actual).toBe(expected);
 });
 
-test('test filepath.yml', () => {
+test('testing filepath.yml', () => {
   const expected = readFile('resultFilepath.txt');
   const actual = parser(getFixturePath('filepath1.yml'), getFixturePath('filepath2.yml'), 'stylish');
   expect(actual).toBe(expected);
 });
 
-test('test file json', () => {
+test('testing file json', () => {
   const expected = readFile('result.txt');
   const actual = parser(getFixturePath('file1.json'), getFixturePath('file2.json'), 'stylish');
   expect(actual).toBe(expected);
 });
 
-test('test file yml', () => {
+test('testing file yml', () => {
   const expected = readFile('result.txt');
   const actual = parser(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'stylish');
   expect(actual).toBe(expected);
 });
 
-test('test plain json', () => {
+test('testing plain json', () => {
   const expected = readFile('resultPlain.txt');
   const actual = parser(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain');
   expect(actual).toBe(expected);
 });
 
-test('test plain yml', () => {
+test('testing plain yml', () => {
   const expected = readFile('resultPlain.txt');
   const actual = parser(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'plain');
   expect(actual).toBe(expected);
 });
 
-test('test json', () => {
+test('testing json', () => {
   const expected = readFile('resultJson.txt');
   const actual = parser(getFixturePath('file1.json'), getFixturePath('file2.json'), 'json');
   expect(actual).toBe(expected);
