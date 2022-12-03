@@ -5,15 +5,54 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/0ffa1e47a86ab5a2f1c8/maintainability)](https://codeclimate.com/github/Anitnelav01/frontend-project-46/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/0ffa1e47a86ab5a2f1c8/test_coverage)](https://codeclimate.com/github/Anitnelav01/frontend-project-46/test_coverage)
 
-### JSON
 
-[![asciicast](https://asciinema.org/a/ClXzZntE9lsOlEuLV2gNW7PrG.svg)](https://asciinema.org/a/ClXzZntE9lsOlEuLV2gNW7PrG)
+### Setup
 
-[![asciicast](https://asciinema.org/a/gxElkQu8vMf9q926IotCLVGNe.svg)](https://asciinema.org/a/gxElkQu8vMf9q926IotCLVGNe) 
+```
+$ make install
+```
+```
+$ sudo npm link
+```
 
 
-### YML
 
-[![asciicast](https://asciinema.org/a/LjdCcKWrB7i3I2ZgqQ62OvPuN.svg)](https://asciinema.org/a/LjdCcKWrB7i3I2ZgqQ62OvPuN)
+### json
 
- [![asciicast](https://asciinema.org/a/wviiKwohDclnLHqpnNoxNRfNi.svg)](https://asciinema.org/a/wviiKwohDclnLHqpnNoxNRfNi)
+```
+$ gendiff filepath1.json filepath2.json
+```
+
+[![asciicast](https://asciinema.org/a/542355.svg)](https://asciinema.org/a/542355)
+
+[![asciicast](https://asciinema.org/a/DH0Q5oGNHeD0ucfWllpUshhbf.svg)](https://asciinema.org/a/DH0Q5oGNHeD0ucfWllpUshhbf)
+
+### yml
+
+```
+$ gendiff filepath1.yml filepath2.yml
+```
+
+[![asciicast](https://asciinema.org/a/5RASwQFhBS1ZbOLzfQaFDoiHh.svg)](https://asciinema.org/a/5RASwQFhBS1ZbOLzfQaFDoiHh)
+
+[![asciicast](https://asciinema.org/a/eotdSCJFM4H3bhwsGbZS6w4pw.svg)](https://asciinema.org/a/eotdSCJFM4H3bhwsGbZS6w4pw)
+
+### plain format
+
+```
+$ gendiff --format plain filepath1.json filepath2.json
+```
+
+[![asciicast](https://asciinema.org/a/lZtmhpQW2eNvHIV7OB5JEUl9f.svg)](https://asciinema.org/a/lZtmhpQW2eNvHIV7OB5JEUl9f)
+
+[![asciicast](https://asciinema.org/a/oGBLqT9SdjoKZPaXYclA9w0Gv.svg)](https://asciinema.org/a/oGBLqT9SdjoKZPaXYclA9w0Gv)
+
+### json format
+
+```
+$ gendiff --format json filepath1.json filepath2.json
+```
+
+[![asciicast](https://asciinema.org/a/TMv9AvRZNCvXFJbnJ5AMNTmUG.svg)](https://asciinema.org/a/TMv9AvRZNCvXFJbnJ5AMNTmUG)
+
+[![asciicast](https://asciinema.org/a/rLdlLAXuQYZrm5KAVlxUyKtZ3.svg)](https://asciinema.org/a/rLdlLAXuQYZrm5KAVlxUyKtZ3)
