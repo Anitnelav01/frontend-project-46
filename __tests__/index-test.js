@@ -8,46 +8,28 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const getFixturePath = (filename) => path.join(__dirname, '..', '__fixtures__', filename);
-const readFile = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
+const readFixtures = (filename) => readFileSync(getFixturePath(filename), 'utf-8');
+const actual = (file) => readFixtures(file);
+const expected = (filename1, filename2, formatName = 'stylish') => parser(getFixturePath(filename1), getFixturePath(filename2), formatName);
 
-test('testing filepath.json', () => {
-  const expected = readFile('resultFilepath.txt');
-  const actual = parser(getFixturePath('filepath1.json'), getFixturePath('filepath2.json'), 'stylish');
-  expect(actual).toBe(expected);
-});
+describe('test', () => {
+  it('testing json format', () => {
+    expect(actual('stylish.txt')).toBe(expected('file1.json', 'file2.json'));
 
-test('testing filepath.yml', () => {
-  const expected = readFile('resultFilepath.txt');
-  const actual = parser(getFixturePath('filepath1.yml'), getFixturePath('filepath2.yml'), 'stylish');
-  expect(actual).toBe(expected);
-});
+    expect(actual('stylish.txt')).toBe(expected('file1.json', 'file2.json', 'stylish'));
 
-test('testing file json', () => {
-  const expected = readFile('result.txt');
-  const actual = parser(getFixturePath('file1.json'), getFixturePath('file2.json'), 'stylish');
-  expect(actual).toBe(expected);
-});
+    expect(actual('plain.txt')).toBe(expected('file1.json', 'file2.json', 'plain'));
 
-test('testing file yml', () => {
-  const expected = readFile('result.txt');
-  const actual = parser(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'stylish');
-  expect(actual).toBe(expected);
-});
+    expect(actual('json.txt')).toBe(expected('file1.json', 'file2.json', 'json'));
+  });
 
-test('testing plain json', () => {
-  const expected = readFile('resultPlain.txt');
-  const actual = parser(getFixturePath('file1.json'), getFixturePath('file2.json'), 'plain');
-  expect(actual).toBe(expected);
-});
+  it('testing yml format', () => {
+    expect(actual('stylish.txt')).toBe(expected('file1.yml', 'file2.yml'));
 
-test('testing plain yml', () => {
-  const expected = readFile('resultPlain.txt');
-  const actual = parser(getFixturePath('file1.yml'), getFixturePath('file2.yml'), 'plain');
-  expect(actual).toBe(expected);
-});
+    expect(actual('stylish.txt')).toBe(expected('file1.yml', 'file2.yml', 'stylish'));
 
-test('testing json', () => {
-  const expected = readFile('resultJson.txt');
-  const actual = parser(getFixturePath('file1.json'), getFixturePath('file2.json'), 'json');
-  expect(actual).toBe(expected);
+    expect(actual('plain.txt')).toBe(expected('file1.yml', 'file2.yml', 'plain'));
+
+    expect(actual('json.txt')).toBe(expected('file1.yml', 'file2.yml', 'json'));
+  });
 });

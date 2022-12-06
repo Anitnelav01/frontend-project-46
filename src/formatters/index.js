@@ -2,7 +2,7 @@ import formatStylish from './stylish.js';
 import formatJson from './json.js';
 import formatPlain from './plain.js';
 
-const getFormatting = (diff, formatName) => {
+const format = (diff, formatName) => {
   const formatters = {
     plain: formatPlain,
     json: formatJson,
@@ -12,4 +12,4 @@ const getFormatting = (diff, formatName) => {
   return formatter(diff);
 };
 
-export default getFormatting;
+export default format;

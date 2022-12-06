@@ -1,22 +1,16 @@
 import path from 'path';
 import { readFileSync } from 'fs';
 import buildDiff from './buildDiff.js';
-import parse from './parse.js';
-import getFormatting from './formatters/index.js';
+import parser from './parse.js';
+import format from './formatters/index.js';
 
-const getPath = (filename) => path.resolve(process.cwd(), filename);
-const getFileFormat = (filename) => path.extname(filename).slice(1);
-const readFile = (filepath) => readFileSync(filepath, 'utf8');
+const getFullPath = (filename) => path.resolve(process.cwd(), filename);
+const getFormat = (filename) => path.extname(filename).slice(1);
 
-const parser = (filepath1, filepath2, formatName = 'stylish') => {
-  const path1 = getPath(filepath1);
-  const data1 = parse(readFile(path1), getFileFormat(filepath1));
-  const path2 = getPath(filepath2);
-  const data2 = parse(readFile(path2), getFileFormat(filepath2));
-
-  const diff = buildDiff(data1, data2);
-  const formattedDiff = getFormatting(diff, formatName);
-  return formattedDiff;
+const genDiff = (filepath1, filepath2, formatName = 'stylish') => {
+  const getData = (filepath) => parser(readFileSync(getFullPath(filepath), 'utf8'), getFormat(filepath));
+  const diff = buildDiff(getData(filepath1), getData(filepath2));
+  return format(diff, formatName);
 };
 
-export default parser;
+export default genDiff;
