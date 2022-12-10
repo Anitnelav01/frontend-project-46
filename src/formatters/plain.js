@@ -10,11 +10,11 @@ const prepareValue = (value) => {
 };
 
 const formatPlain = (diff, path = []) => {
-  const filteredDiff = diff.filter((item) => item.state !== 'unchanged');
+  const filteredDiff = diff.filter((item) => item.type !== 'unchanged');
   const output = filteredDiff.map((item) => {
     const newPath = path.concat(item.key);
     const node = newPath.join('.');
-    switch (item.state) {
+    switch (item.type) {
       case 'removed':
         return `Property '${node}' was removed`;
 
@@ -23,9 +23,9 @@ const formatPlain = (diff, path = []) => {
         return `Property '${node}' was added with value: ${val}`; }
 
       case 'updated': {
-        const oldVal = prepareValue(item.value.oldValue);
-        const newVal = prepareValue(item.value.newValue);
-        return `Property '${node}' was updated. From ${oldVal} to ${newVal}`; }
+        const val1 = prepareValue(item.value.val1);
+        const val2 = prepareValue(item.value.val2);
+        return `Property '${node}' was updated. From ${val1} to ${val2}`; }
 
       default:
         return formatPlain(item.value, newPath);
