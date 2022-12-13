@@ -23,8 +23,8 @@ const formatPlain = (diff, path = []) => {
         return `Property '${node}' was added with value: ${val}`; }
 
       case 'updated': {
-        const val1 = prepareValue(item.value.val1);
-        const val2 = prepareValue(item.value.val2);
+        const val1 = prepareValue(item.value.value1);
+        const val2 = prepareValue(item.value.value2);
         return `Property '${node}' was updated. From ${val1} to ${val2}`; }
 
       default:
