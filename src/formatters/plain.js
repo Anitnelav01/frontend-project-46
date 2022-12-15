@@ -15,7 +15,7 @@ const formatPlain = (diff, path = []) => {
     const newPath = path.concat(item.key);
     const node = newPath.join('.');
     switch (item.type) {
-      case 'removed':
+      case 'deleted':
         return `Property '${node}' was removed`;
 
       case 'added': {

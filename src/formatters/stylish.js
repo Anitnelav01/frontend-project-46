@@ -17,9 +17,9 @@ const prepareValue = (value, depth) => {
 
 const parseDiff = (diff, depth) => {
   const items = diff.flatMap(({ key, value, type }) => {
-    const chars = { added: '+ ', removed: '- ', unchanged: '  ' };
+    const chars = { added: '+ ', deleted: '- ', unchanged: '  ' };
     if (type === 'updated') {
-      return [getString(key, prepareValue(value.value1, depth + 1), chars.removed, depth + 1),
+      return [getString(key, prepareValue(value.value1, depth + 1), chars.deleted, depth + 1),
         getString(key, prepareValue(value.value2, depth + 1), chars.added, depth + 1)];
     }
     if (type === 'complex') {
