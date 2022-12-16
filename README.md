@@ -53,6 +53,6 @@ $ gendiff --format plain filepath1.json filepath2.json
 $ gendiff --format json filepath1.json filepath2.json
 ```
 
-[![asciicast](https://asciinema.org/a/TMv9AvRZNCvXFJbnJ5AMNTmUG.svg)](https://asciinema.org/a/TMv9AvRZNCvXFJbnJ5AMNTmUG)
+[![asciicast](https://asciinema.org/a/QQENicVpfujkZfV0nF3qOYi5k.svg)](https://asciinema.org/a/QQENicVpfujkZfV0nF3qOYi5k)
 
-[![asciicast](https://asciinema.org/a/rLdlLAXuQYZrm5KAVlxUyKtZ3.svg)](https://asciinema.org/a/rLdlLAXuQYZrm5KAVlxUyKtZ3)
+[![asciicast](https://asciinema.org/a/q50Zk7ctEKbyTRm5DpYjWP2Ot.svg)](https://asciinema.org/a/q50Zk7ctEKbyTRm5DpYjWP2Ot)
