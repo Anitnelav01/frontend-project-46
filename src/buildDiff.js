@@ -11,11 +11,11 @@ const buildDiff = (data1, data2) => {
       return { type: 'deleted', key, value: data1[key] };
     }
     if (_.isPlainObject(data1[key]) && _.isPlainObject(data2[key])) {
-      return { type: 'complex', key, value: buildDiff(data1[key], data2[key]) };
+      return { type: 'complex', key, children: buildDiff(data1[key], data2[key]) };
     }
     if (!_.isEqual(data1[key], data2[key])) {
       return {
-        type: 'updated', key, value: { value1: data1[key], value2: data2[key] },
+        type: 'updated', key, value1: data1[key], value2: data2[key],
       };
     }
     return { type: 'unchanged', key, value: data1[key] };

@@ -9,30 +9,23 @@ const prepareValue = (value) => {
   return `${value}`;
 };
 
-const formatPlain = (diff, path = []) => {
-  const filteredDiff = diff.filter((item) => item.type !== 'unchanged');
-  const output = filteredDiff.map((item) => {
-    const newPath = path.concat(item.key);
-    const node = newPath.join('.');
-    switch (item.type) {
-      case 'deleted':
-        return `Property '${node}' was removed`;
-
-      case 'added': {
-        const val = prepareValue(item.value);
-        return `Property '${node}' was added with value: ${val}`; }
-
-      case 'updated': {
-        const val1 = prepareValue(item.value.value1);
-        const val2 = prepareValue(item.value.value2);
-        return `Property '${node}' was updated. From ${val1} to ${val2}`; }
-
-      default:
-        return formatPlain(item.value, newPath);
-    }
-  }).join('\n');
-
-  return output;
+const formatPlain = (diff) => {
+  const filteredDiff = (nodes, parent) => nodes
+    .filter((node) => node.type !== 'unchanged')
+    .map((node) => {
+      const property = parent ? `${parent}.${node.key}` : node.key;
+      switch (node.type) {
+        case 'added':
+          return `Property '${property}' was added with value: ${prepareValue(node.value)}`;
+        case 'deleted':
+          return `Property '${property}' was removed`;
+        case 'updated':
+          return `Property '${property}' was updated. From ${prepareValue(node.value1)} to ${prepareValue(node.value2)}`;
+        default:
+          return `${filteredDiff(node.children, property)}`;
+      }
+    }).join('\n');
+  return filteredDiff(diff, 0);
 };
 
 export default formatPlain;

@@ -1,36 +1,36 @@
 import _ from 'lodash';
 
-const beforeString = (depth) => `  ${' '.repeat(4).repeat(depth - 1)}`;
-const afterString = (depth) => `${' '.repeat(4).repeat(depth)}`;
-const getString = (key, value, char, depth) => `${beforeString(depth)}${char}${key}: ${value}`;
-const wrapBrackets = (body, depth) => `{\n${body}\n${afterString(depth)}}`;
+const makeIndent = (depth) => {
+  const str = ' ';
+  return str.repeat(depth * 4 - 2);
+};
 
-const prepareValue = (value, depth) => {
+const prepareValue = (value, depth = 1) => {
   if (!_.isObject(value)) {
     return value;
   }
-  const entries = Object.entries(value);
-  const items = entries.map(([key, val]) => getString(key, prepareValue(val, depth + 1), '  ', depth + 1));
-  const body = items.join('\n');
-  return wrapBrackets(body, depth);
+  const keys = Object.keys(value);
+  const getKeys = keys.map((key) => `${makeIndent(depth + 1)}  ${key}: ${prepareValue(value[key], depth + 1)}`);
+  return `{\n${getKeys.join('\n')}\n  ${makeIndent(depth)}}`;
 };
 
-const parseDiff = (diff, depth) => {
-  const items = diff.flatMap(({ key, value, type }) => {
-    const chars = { added: '+ ', deleted: '- ', unchanged: '  ' };
-    if (type === 'updated') {
-      return [getString(key, prepareValue(value.value1, depth + 1), chars.deleted, depth + 1),
-        getString(key, prepareValue(value.value2, depth + 1), chars.added, depth + 1)];
+const formatStylish = (diff) => {
+  const iter = (tree, depth) => tree.map((node) => {
+    const getValue = (value, sign) => `${makeIndent(depth)}${sign} ${node.key}: ${prepareValue(value, depth)}\n`;
+    switch (node.type) {
+      case 'added':
+        return getValue(node.value, '+');
+      case 'deleted':
+        return getValue(node.value, '-');
+      case 'updated':
+        return `${getValue(node.value1, '-')}${getValue(node.value2, '+')}`;
+      case 'complex':
+        return `${makeIndent(depth)}  ${node.key}: {\n${iter(node.children, depth + 1).join('')}${makeIndent(depth)}  }\n`;
+      default:
+        return getValue(node.value, ' ');
     }
-    if (type === 'complex') {
-      return getString(key, parseDiff(value, depth + 1), '  ', depth + 1);
-    }
-    return getString(key, prepareValue(value, depth + 1), chars[type], depth + 1);
   });
-  const body = items.join('\n');
-  return wrapBrackets(body, depth);
+  return `{\n${iter(diff, 1).join('')}}`;
 };
-
-const formatStylish = (diff) => parseDiff(diff, 0);
 
 export default formatStylish;
