@@ -1,12 +1,12 @@
-const prepareValue = (value) => {
+const stringify = (value) => {
   if (typeof value === 'object' && value !== null) {
     return '[complex value]';
   } if (typeof value === 'string') {
     return `'${value}'`;
   } if (value === null) {
-    return null;
+    return String(null);
   }
-  return `${value}`;
+  return String(value);
 };
 
 const formatPlain = (diff) => {
@@ -16,16 +16,16 @@ const formatPlain = (diff) => {
       const property = parent ? `${parent}.${node.key}` : node.key;
       switch (node.type) {
         case 'added':
-          return `Property '${property}' was added with value: ${prepareValue(node.value)}`;
+          return `Property '${property}' was added with value: ${stringify(node.value)}`;
         case 'deleted':
           return `Property '${property}' was removed`;
         case 'updated':
-          return `Property '${property}' was updated. From ${prepareValue(node.value1)} to ${prepareValue(node.value2)}`;
+          return `Property '${property}' was updated. From ${stringify(node.value1)} to ${stringify(node.value2)}`;
         default:
           return `${filteredDiff(node.children, property)}`;
       }
     }).join('\n');
-  return filteredDiff(diff, 0);
+  return filteredDiff(diff, '');
 };
 
 export default formatPlain;

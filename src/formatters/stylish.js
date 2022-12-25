@@ -12,18 +12,24 @@ const stringify = (value, depth = 1) => {
 };
 
 const iter = (tree, depth) => tree.map((node) => {
-  const output = (children) => iter(children, depth + 1);
   switch (node.type) {
     case 'added':
       return `${indent(depth)}${'+'} ${node.key}: ${stringify(node.value, depth)}\n`;
     case 'deleted':
       return `${indent(depth)}${'-'} ${node.key}: ${stringify(node.value, depth)}\n`;
     case 'updated':
-      return `${indent(depth)}${'-'} ${node.key}: ${stringify(node.value1, depth)}\n${indent(depth)}${'+'} ${node.key}: ${stringify(node.value2, depth)}\n`;
+    {
+      const output1 = `${indent(depth)}${'-'} ${node.key}: ${stringify(node.value1, depth)}\n`;
+      const output2 = `${indent(depth)}${'+'} ${node.key}: ${stringify(node.value2, depth)}\n`;
+      return `${output1}${output2}`;
+    }
     case 'complex':
-      return `${indent(depth)}  ${node.key}: {\n${output(node.children).join('')}${indent(depth)}  }\n`;
+    {
+      const output = iter(node.children, depth + 1);
+      return `${indent(depth)}  ${node.key}: {\n${output.join('')}${indent(depth)}  }\n`;
+    }
     default:
-      return `${indent(depth)}${' '} ${node.key}: ${stringify(node.value, depth)}\n`;
+      return `${indent(depth)}  ${node.key}: ${stringify(node.value, depth)}\n`;
   }
 });
 
