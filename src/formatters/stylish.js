@@ -14,25 +14,23 @@ const stringify = (value, depth = 1) => {
 const iter = (tree, depth) => tree.map((node) => {
   switch (node.type) {
     case 'added':
-      return `${indent(depth)}${'+'} ${node.key}: ${stringify(node.value, depth)}\n`;
+      return `${indent(depth)}${'+'} ${node.key}: ${stringify(node.value, depth)}`;
     case 'deleted':
-      return `${indent(depth)}${'-'} ${node.key}: ${stringify(node.value, depth)}\n`;
-    case 'updated':
-    {
-      const output1 = `${indent(depth)}${'-'} ${node.key}: ${stringify(node.value1, depth)}\n`;
-      const output2 = `${indent(depth)}${'+'} ${node.key}: ${stringify(node.value2, depth)}\n`;
-      return `${output1}${output2}`;
+      return `${indent(depth)}${'-'} ${node.key}: ${stringify(node.value, depth)}`;
+    case 'updated': {
+      const output1 = `${indent(depth)}${'-'} ${node.key}: ${stringify(node.value1, depth)}`;
+      const output2 = `${indent(depth)}${'+'} ${node.key}: ${stringify(node.value2, depth)}`;
+      return `${output1}\n${output2}`;
     }
-    case 'complex':
-    {
+    case 'complex': {
       const output = iter(node.children, depth + 1);
-      return `${indent(depth)}  ${node.key}: {\n${output.join('')}${indent(depth)}  }\n`;
+      return `${indent(depth)}  ${node.key}: {\n${output.join('\n')}\n${indent(depth)}  }`;
     }
     default:
-      return `${indent(depth)}  ${node.key}: ${stringify(node.value, depth)}\n`;
+      return `${indent(depth)}  ${node.key}: ${stringify(node.value, depth)}`;
   }
 });
 
-const formatStylish = (diff) => `{\n${iter(diff, 1).join('')}}`;
+const formatStylish = (diff) => `{\n${iter(diff, 1).join('\n')}\n}`;
 
 export default formatStylish;
